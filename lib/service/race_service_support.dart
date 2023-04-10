@@ -8,7 +8,8 @@ abstract class RaceServiceSupport extends RaceService {
 
   @override
   Future<String> sendMessage(final String text) async {
-    final url = Uri.https('quest-baldy-dash.ue.r.appspot.com', playerId);
+    //final url = Uri.https('quest-baldy-dash.ue.r.appspot.com', playerId);
+    final url = Uri.http('localhost:8080', '/messages/$playerId');
     final response = await http.post(url, body: text);
     return response.headers['location'] ?? '';
   }

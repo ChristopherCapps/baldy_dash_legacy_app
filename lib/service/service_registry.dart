@@ -26,12 +26,18 @@ class ServiceRegistry extends foundation.ChangeNotifier {
       throw Exception('Already bootstrapped');
     }
     return Settings.create().then(
-      (settingsF) =>
-          FirestoreService.init(DefaultFirebaseOptions.currentPlatform).then(
-        (firestoreService) =>
-            FirestoreRaceService.init(firestoreService.database).then(
+      (settingsF) => FirestoreService.init(
+        DefaultFirebaseOptions.currentPlatform,
+      ).then(
+        (firestoreService) => FirestoreRaceService.init(
+          settingsF.uuid,
+          firestoreService.database,
+        ).then(
           (firestoreRaceService) => ServiceRegistry._(
-              settingsF, firestoreService, firestoreRaceService),
+            settingsF,
+            firestoreService,
+            firestoreRaceService,
+          ),
         ),
       ),
     );

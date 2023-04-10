@@ -12,7 +12,8 @@ class Settings {
     }
   }
 
-  String get uuid => _prefs.getString(_uuid)!;
+  String get uuid =>
+      'e13cf330-d710-11ed-af74-e321e05f36ef'; //prefs.getString(_uuid)!;
 
   static Future<Settings> create() async {
     final settings = await SharedPreferences.getInstance()
